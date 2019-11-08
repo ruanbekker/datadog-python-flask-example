@@ -21,25 +21,14 @@ Of if you use the US account:
 export DATADOG_SITE=datadoghq.com
 ```
 
+Deploy:
+
+```
+$ docker-compose up
+```
+
 ### Source
 - https://github.com/DataDog/trace-examples/tree/master/python/flask
-
-### Docs:
-
-Python Log Collection:
-https://docs.datadoghq.com/logs/log_collection/python/?tab=pythonjsonlogger
-
-Tracing Docker Applications:
-https://docs.datadoghq.com/agent/docker/apm/?tab=python
-
-Docker Agent:
-https://docs.datadoghq.com/agent/docker/?tab=standard
-
-Docker Log Collection:
-https://docs.datadoghq.com/agent/docker/log/?tab=configurationfile
-
-Monitor Flask Apps:
-https://www.datadoghq.com/blog/monitoring-flask-apps-with-datadog/#installing-the-datadog-agent
 
 ### Screenshots:
 
@@ -80,3 +69,21 @@ Logs:
 Metrics:
 
 <img width="1146" alt="image" src="https://user-images.githubusercontent.com/30043398/68369344-bf77f300-0142-11ea-99b8-89b11ff695e3.png">
+
+### Docs:
+
+Python Log Collection:
+https://docs.datadoghq.com/logs/log_collection/python/?tab=pythonjsonlogger
+
+Tracing Docker Applications:
+https://docs.datadoghq.com/agent/docker/apm/?tab=python
+
+Docker Agent:
+https://docs.datadoghq.com/agent/docker/?tab=standard
+
+Docker Log Collection:
+https://docs.datadoghq.com/agent/docker/log/?tab=configurationfile
+
+Monitor Flask Apps:
+https://www.datadoghq.com/blog/monitoring-flask-apps-with-datadog/#installing-the-datadog-agent
+
