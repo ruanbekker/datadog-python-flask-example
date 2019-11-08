@@ -4,7 +4,7 @@ services:
     container_name: datadog-agent
     image: datadog/agent:latest
     environment:
-      - DD_SITE=datadoghq.eu
+      - DD_SITE=${DATADOG_SITE:-datadoghq.eu}
       - DD_HOSTNAME=${HOSTNAME}
       - DD_LOGS_ENABLED=true
       #- DD_PROCESS_AGENT_ENABLED=true
