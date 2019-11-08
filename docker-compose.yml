@@ -1,0 +1,41 @@
+version: '2'
+services:
+  datadog-agent:
+    container_name: datadog-agent
+    image: datadog/agent:latest
+    environment:
+      - DD_SITE=datadoghq.eu
+      - DD_HOSTNAME=${HOSTNAME}
+      - DD_LOGS_ENABLED=true
+      #- DD_PROCESS_AGENT_ENABLED=true
+      - DD_APM_ENABLED=true
+      - NON_LOCAL_TRAFFIC=true
+      #- DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_BIND_HOST=0.0.0.0
+      - DD_AC_EXCLUDE="datadog-agent"
+      - DD_API_KEY=${DATADOG_API_KEY}
+    ports:
+      - "8126:8126/tcp"
+    volumes:
+      # Logs are collected from container stdout/stderr from the Docker socket.
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - datadog
+
+  flask_app:
+    container_name: flask-app
+    image: datadog-demo-app:v2
+    restart: always
+#    env_file: .env
+    environment: 
+      - DATADOG_TRACE_AGENT_HOSTNAME=datadog-agent
+      - DD_AGENT_HOST=datadog-agent
+    ports:
+      - "5000:5000"
+    depends_on:
+      - datadog-agent
+    networks:
+      - datadog
+
+networks:
+  datadog: {}
