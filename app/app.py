@@ -31,6 +31,32 @@ from .exceptions import AppException
 from .limiter import limiter
 from .signals import connect_signals
 
+# Logging
+import logging
+from pythonjsonlogger import jsonlogger
+from datetime import datetime
+
+class CustomJsonFormatter(jsonlogger.JsonFormatter):
+    def add_fields(self, log_record, record, message_dict):
+        super(CustomJsonFormatter, self).add_fields(log_record, record, message_dict)
+        if not log_record.get('timestamp'):
+            # this doesn't use record.created, so it is slightly off
+            now = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+            log_record['timestamp'] = now
+        if log_record.get('level'):
+            log_record['level'] = log_record['level'].upper()
+        else:
+            log_record['level'] = record.levelname
+
+formatter = CustomJsonFormatter('(timestamp) (level) (name) (message)')
+
+logger = logging.getLogger()
+logHandler = logging.StreamHandler()
+#formatter = jsonlogger.JsonFormatter()
+formatter = CustomJsonFormatter('(timestamp) (level) (name) (message)')
+logHandler.setFormatter(formatter)
+logger.addHandler(logHandler)
+
 # Create a new app
 app = Flask(__name__)
 
