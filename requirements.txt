@@ -1,0 +1,8 @@
+blinker
+ddtrace
+flask
+flask-caching
+flask-cors
+flask-limiter
+python-json-logger
+requests
